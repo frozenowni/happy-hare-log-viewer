@@ -271,6 +271,10 @@ const CONTENT_RULES = [
   { category: 'sync', re: /^MMU gear stepper will be (synced|unsynced)/, extract: (m) => ({ synced: m[1] === 'synced' }) },
   { category: 'servo', re: /^Setting servo to/, extract: () => ({}) },
   { category: 'servo', re: /^Current servo angle/, extract: () => ({}) },
+  { category: 'cutter', re: /^Measuring blade cutter pos/i, extract: () => ({}) },
+  { category: 'cutter', re: /blade_pos/, extract: () => ({}) },
+  { category: 'led', re: /^No LEDs configured/, extract: () => ({}) },
+  { category: 'led', re: /^Error updating leds/i, extract: () => ({}) },
   { category: 'espooler', re: /^ESPOOLER:/, extract: () => ({}) },
 ];
 

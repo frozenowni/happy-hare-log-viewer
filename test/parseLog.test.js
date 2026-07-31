@@ -172,6 +172,12 @@ test('parses MMU Statistics Report fields including Gate Statistics', () => {
   assert.deepEqual(report.fields.gateStatistics[3], { gate: 3, symbol: '😎' });
 });
 
+test('classifies LED and Cutter narration lines rather than leaving them Uncategorized', () => {
+  const { events } = parseLog('09:00:00 No LEDs configured on MMU\n09:00:01 Measuring blade cutter postion (with filament fragment)...\n');
+  assert.equal(events[0].category, 'led');
+  assert.equal(events[1].category, 'cutter');
+});
+
 // --- Spoolman fixture --------------------------------------------------------
 
 test('classifies Spoolman-related events', () => {

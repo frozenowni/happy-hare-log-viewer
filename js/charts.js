@@ -38,10 +38,10 @@ function renderChart(canvasId, config) {
  */
 export function renderAllCharts(events, parsedLog, onJump) {
   renderSwapTimingChart(events, onJump);
-  renderGateReliabilityChart(events);
+  renderGateReliabilityChart(events, onJump);
   renderSlippageChart(events, onJump);
-  renderPauseFrequencyChart(parsedLog);
-  renderWearCounterChart(events);
+  renderPauseFrequencyChart(parsedLog, onJump);
+  renderWearCounterChart(events, onJump);
 }
 
 /**
@@ -81,11 +81,14 @@ function renderSwapTimingChart(events, onJump) {
   });
 }
 
-/** @param {import('./parseLog.js').LogEvent[]} events */
-function renderGateReliabilityChart(events) {
+/**
+ * @param {import('./parseLog.js').LogEvent[]} events
+ * @param {(eventIndex: number) => void} onJump
+ */
+function renderGateReliabilityChart(events, onJump) {
   const reliability = deriveGateReliability(events) ?? [];
   const usage = deriveGateUsage(events);
-  const usageByGate = new Map(usage.map((u) => [u.gate, u.count]));
+  const usageByGate = new Map(usage.map((u) => [u.gate, u]));
 
   renderChart('chart-gate-reliability', {
     type: 'bar',
@@ -100,7 +103,7 @@ function renderGateReliabilityChart(events) {
         },
         {
           label: 'Swaps using this gate',
-          data: reliability.map((g) => usageByGate.get(g.gate) ?? 0),
+          data: reliability.map((g) => usageByGate.get(g.gate)?.count ?? 0),
           backgroundColor: '#e6a700',
           yAxisID: 'y1',
           type: 'line',
@@ -113,6 +116,11 @@ function renderGateReliabilityChart(events) {
         y: { min: 0, max: 1, title: { display: true, text: 'reliability' } },
         y1: { position: 'right', title: { display: true, text: 'swap count' }, grid: { drawOnChartArea: false } },
       },
+      onClick: (/** @type {any} */ _evt, /** @type {any[]} */ elements, /** @type {any} */ chart) =>
+        onFirstPointClick(chart, elements, (i) => {
+          const target = usageByGate.get(reliability[i]?.gate)?.lastEventIndex;
+          if (target != null) onJump(target);
+        }),
     },
   });
 }
@@ -140,8 +148,11 @@ function renderSlippageChart(events, onJump) {
   });
 }
 
-/** @param {import('./parseLog.js').ParsedLog} parsedLog */
-function renderPauseFrequencyChart(parsedLog) {
+/**
+ * @param {import('./parseLog.js').ParsedLog} parsedLog
+ * @param {(eventIndex: number) => void} onJump
+ */
+function renderPauseFrequencyChart(parsedLog, onJump) {
   const perSession = deriveErrorPauseCountsPerSession(parsedLog);
   renderChart('chart-pause-frequency', {
     type: 'bar',
@@ -149,12 +160,23 @@ function renderPauseFrequencyChart(parsedLog) {
       labels: perSession.map((s) => s.sessionLabel),
       datasets: [{ label: 'Errors / Pauses', data: perSession.map((s) => s.count), backgroundColor: '#d32f2f' }],
     },
-    options: { responsive: true, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } } },
+    options: {
+      responsive: true,
+      scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } },
+      onClick: (/** @type {any} */ _evt, /** @type {any[]} */ elements, /** @type {any} */ chart) =>
+        onFirstPointClick(chart, elements, (i) => {
+          const target = perSession[i]?.firstEventIndex;
+          if (target != null) onJump(target);
+        }),
+    },
   });
 }
 
-/** @param {import('./parseLog.js').LogEvent[]} events */
-function renderWearCounterChart(events) {
+/**
+ * @param {import('./parseLog.js').LogEvent[]} events
+ * @param {(eventIndex: number) => void} onJump
+ */
+function renderWearCounterChart(events, onJump) {
   const summary = deriveWearCounterSummary(events);
   renderChart('chart-wear-counters', {
     type: 'bar',
@@ -165,6 +187,13 @@ function renderWearCounterChart(events) {
         { label: 'Limit', data: summary.map((s) => s.limit), backgroundColor: '#d32f2f' },
       ],
     },
-    options: { responsive: true },
+    options: {
+      responsive: true,
+      onClick: (/** @type {any} */ _evt, /** @type {any[]} */ elements, /** @type {any} */ chart) =>
+        onFirstPointClick(chart, elements, (i) => {
+          const target = summary[i]?.lastEventIndex;
+          if (target != null) onJump(target);
+        }),
+    },
   });
 }

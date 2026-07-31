@@ -15,6 +15,24 @@
 const GATE_QUALITY_ORDER = ['😎', '😃', '😊', '😐', '😟', '😢', '😱'];
 
 /**
+ * Returns the last element of `array` satisfying `predicate`, or null. Used
+ * throughout this module (and by js/diagrams.js) wherever "the most recent
+ * Event of some kind so far" is needed -- later occurrences supersede
+ * earlier ones as the current picture of state.
+ * @template T
+ * @param {T[]} array
+ * @param {(item: T) => boolean} predicate
+ * @returns {T | null}
+ */
+export function findLast(array, predicate) {
+  let result = null;
+  for (const item of array) {
+    if (predicate(item)) result = item;
+  }
+  return result;
+}
+
+/**
  * @param {string} symbol
  * @returns {number | null} 1.0 (best) down to ~0 (worst), or null for n/a.
  */
@@ -43,29 +61,30 @@ export function deriveGateToolMapTimeline(events) {
 
 /**
  * Counts how many Swaps used each physical Gate, by resolving each Swap's
- * Tool against the most recent gate-map-update Event before it.
+ * Tool against the most recent gate-map-update Event before it. Also tracks
+ * the last such Swap's Event index per Gate, so a "gate usage" chart bar can
+ * jump somewhere concrete when clicked.
  * @param {LogEvent[]} events
- * @returns {{ gate: number, count: number }[]}
+ * @returns {{ gate: number, count: number, lastEventIndex: number }[]}
  */
 export function deriveGateUsage(events) {
   const timeline = deriveGateToolMapTimeline(events);
-  /** @type {Map<number, number>} */
+  /** @type {Map<number, { count: number, lastEventIndex: number }>} */
   const usage = new Map();
 
   for (const event of events) {
     if (event.category !== 'swap' || !event.fields.toTool) continue;
-    let mapping = null;
-    for (const entry of timeline) {
-      if (entry.eventIndex >= event.index) break;
-      mapping = entry;
-    }
+    const mapping = findLast(timeline, (entry) => entry.eventIndex < event.index);
     if (!mapping) continue;
     const gate = mapping.toolsByGate.indexOf(event.fields.toTool);
     if (gate === -1) continue;
-    usage.set(gate, (usage.get(gate) ?? 0) + 1);
+    const entry = usage.get(gate) ?? { count: 0, lastEventIndex: event.index };
+    entry.count += 1;
+    entry.lastEventIndex = event.index;
+    usage.set(gate, entry);
   }
 
-  return [...usage.entries()].map(([gate, count]) => ({ gate, count })).sort((a, b) => a.gate - b.gate);
+  return [...usage.entries()].map(([gate, v]) => ({ gate, ...v })).sort((a, b) => a.gate - b.gate);
 }
 
 /**
@@ -75,14 +94,9 @@ export function deriveGateUsage(events) {
  * @returns {{ gate: number, symbol: string, score: number | null }[] | null}
  */
 export function deriveGateReliability(events) {
-  let latest = null;
-  for (const event of events) {
-    if (event.category === 'mmu-stats-report' && event.fields.gateStatistics) {
-      latest = event.fields.gateStatistics;
-    }
-  }
-  if (!latest) return null;
-  return latest.map((/** @type {{gate: number, symbol: string}} */ g) => ({
+  const latestEvent = findLast(events, (e) => e.category === 'mmu-stats-report' && e.fields.gateStatistics != null);
+  if (!latestEvent) return null;
+  return latestEvent.fields.gateStatistics.map((/** @type {{gate: number, symbol: string}} */ g) => ({
     ...g,
     score: gateQualityScore(g.symbol),
   }));
@@ -124,17 +138,24 @@ export function deriveSlippageSeries(events) {
 
 /**
  * Error/Pause event counts per detected Session (pre/post-session events are
- * not attributed to any session and are not counted here).
+ * not attributed to any session and are not counted here). Also reports the
+ * first such Event's index per Session, so a "pause frequency" chart bar can
+ * jump somewhere concrete when clicked.
  * @param {ParsedLog} parsedLog
- * @returns {{ sessionLabel: string, count: number }[]}
+ * @returns {{ sessionLabel: string, count: number, firstEventIndex: number | null }[]}
  */
 export function deriveErrorPauseCountsPerSession(parsedLog) {
   return parsedLog.sessions.map((session) => {
     let count = 0;
+    /** @type {number | null} */
+    let firstEventIndex = null;
     for (let i = session.startEventIndex; i <= session.endEventIndex; i++) {
-      if (parsedLog.events[i].category === 'error-pause') count++;
+      if (parsedLog.events[i].category === 'error-pause') {
+        count++;
+        if (firstEventIndex === null) firstEventIndex = i;
+      }
     }
-    return { sessionLabel: session.label, count };
+    return { sessionLabel: session.label, count, firstEventIndex };
   });
 }
 
@@ -169,13 +190,8 @@ export function parseGateMapBlock(raw) {
  * @returns {{ toolsByGate: string[], availByGate: string[], selectedTool: string | null } | null}
  */
 export function deriveLatestGateMapSnapshot(events) {
-  let latest = null;
-  for (const event of events) {
-    if (event.category !== 'gate-map-update') continue;
-    const parsed = parseGateMapBlock(event.raw);
-    if (parsed) latest = parsed;
-  }
-  return latest;
+  const latestEvent = findLast(events, (e) => e.category === 'gate-map-update' && parseGateMapBlock(e.raw) != null);
+  return latestEvent ? parseGateMapBlock(latestEvent.raw) : null;
 }
 
 /**
@@ -230,16 +246,18 @@ export function deriveJobStateGraph(events) {
 
 /**
  * Cumulative count and configured limit (if seen) per named wear counter.
+ * Also tracks the last Event index per counter, so a "wear counter" chart
+ * bar can jump somewhere concrete when clicked.
  * @param {LogEvent[]} events
- * @returns {{ counter: string, count: number, limit: number | null }[]}
+ * @returns {{ counter: string, count: number, limit: number | null, lastEventIndex: number }[]}
  */
 export function deriveWearCounterSummary(events) {
-  /** @type {Map<string, { count: number, limit: number | null }>} */
+  /** @type {Map<string, { count: number, limit: number | null, lastEventIndex: number }>} */
   const byCounter = new Map();
 
   for (const event of events) {
     if (event.category !== 'wear-counter' || !event.fields.counter) continue;
-    const entry = byCounter.get(event.fields.counter) ?? { count: 0, limit: null };
+    const entry = byCounter.get(event.fields.counter) ?? { count: 0, limit: null, lastEventIndex: event.index };
     const argsParsed = event.fields.argsParsed ?? {};
     if ('INCR' in argsParsed) {
       entry.count += Number(argsParsed.INCR) || 0;
@@ -247,6 +265,7 @@ export function deriveWearCounterSummary(events) {
     if ('LIMIT' in argsParsed) {
       entry.limit = Number(argsParsed.LIMIT);
     }
+    entry.lastEventIndex = event.index;
     byCounter.set(event.fields.counter, entry);
   }
 

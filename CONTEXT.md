@@ -24,7 +24,7 @@ An Event whose message is Happy Hare verbatim-echoing a gcode command it just re
 ## MMU Domain Concepts (from Happy Hare)
 
 **Session** (aka Job):
-One print job's worth of Events, bounded by Happy Hare's own Job State transitions (from an `INITIALIZED`/`STARTED` transition through a terminal state like `READY` or `CANCELLED`). A single `mmu.log` typically contains many Sessions accumulated over time.
+One print job's worth of Events, bounded by Happy Hare's own Job State transitions: a Session opens at any transition landing on `STARTED` (not only from `INITIALIZED` — a cancelled job restarting goes `COMPLETE -> STARTED`, and that still opens a new Session) and closes at the last Job State transition recorded for it before the next Session opens. A single `mmu.log` typically contains many Sessions accumulated over time.
 _Avoid_: "print" as the noun for this — Session is the analysis-scope term; a Session may not correspond 1:1 to a print if a job is cancelled and restarted.
 
 **Job State**:

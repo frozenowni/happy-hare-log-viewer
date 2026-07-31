@@ -2,7 +2,7 @@
  * The fixed Category vocabulary for Events, per CONTEXT.md.
  * @typedef {'command-echo'|'tool-change-request'|'swap'|'gate-map-update'|'job-state-change'
  *   |'mmu-stats-report'|'wear-counter'|'warning'|'error-pause'|'endless-spool-remap'|'spoolman'
- *   |'sync'|'servo'|'espooler'|'uncategorized'} Category
+ *   |'sync'|'servo'|'cutter'|'led'|'espooler'|'uncategorized'} Category
  */
 
 /** @type {Category[]} */
@@ -20,6 +20,8 @@ export const CATEGORIES = [
   'spoolman',
   'sync',
   'servo',
+  'cutter',
+  'led',
   'espooler',
   'uncategorized',
 ];
@@ -43,6 +45,8 @@ export const CATEGORY_STYLE = {
   spoolman: { label: 'Spoolman', color: '#ad1457' },
   sync: { label: 'Sync', color: '#607d8b' },
   servo: { label: 'Servo', color: '#607d8b' },
+  cutter: { label: 'Cutter', color: '#607d8b' },
+  led: { label: 'LED', color: '#607d8b' },
   espooler: { label: 'eSpooler', color: '#607d8b' },
   uncategorized: { label: 'Uncategorized', color: '#9e9e9e' },
 };

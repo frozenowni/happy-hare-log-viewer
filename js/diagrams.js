@@ -1,4 +1,4 @@
-import { deriveLatestGateMapSnapshot, deriveTimelineMarkers, deriveJobStateGraph } from './metrics.js';
+import { deriveLatestGateMapSnapshot, deriveTimelineMarkers, deriveJobStateGraph, findLast } from './metrics.js';
 import { CATEGORY_STYLE } from './categories.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
@@ -17,6 +17,16 @@ function el(tag, attrs = {}) {
 }
 
 /**
+ * @param {HTMLElement} container
+ * @param {string} message
+ */
+function renderEmptyState(container, message) {
+  const empty = document.createElement('p');
+  empty.textContent = message;
+  container.appendChild(empty);
+}
+
+/**
  * Renders the live Gate ↔ Tool map for the current scope (latest snapshot
  * seen so far, not a full time-scrubbing view -- see CONTEXT.md). Every gate
  * cell jumps to the raw line of the snapshot's source Event when clicked.
@@ -28,16 +38,12 @@ export function renderGateMap(container, events, onJump) {
   container.textContent = '';
   const snapshot = deriveLatestGateMapSnapshot(events);
   if (!snapshot) {
-    const empty = document.createElement('p');
-    empty.textContent = 'No Gate/TTG map data in this scope yet.';
-    container.appendChild(empty);
+    renderEmptyState(container, 'No Gate/TTG map data in this scope yet.');
     return;
   }
 
-  let sourceEventIndex = null;
-  for (const event of events) {
-    if (event.category === 'gate-map-update') sourceEventIndex = event.index;
-  }
+  const sourceEvent = findLast(events, (e) => e.category === 'gate-map-update');
+  const sourceEventIndex = sourceEvent ? sourceEvent.index : null;
 
   const gateCount = snapshot.toolsByGate.length;
   const cellWidth = 64;
@@ -96,9 +102,7 @@ export function renderSessionTimeline(container, events, onMarkerClick) {
   container.textContent = '';
   const markers = deriveTimelineMarkers(events);
   if (markers.length === 0) {
-    const empty = document.createElement('p');
-    empty.textContent = 'No timeline events in this scope yet.';
-    container.appendChild(empty);
+    renderEmptyState(container, 'No timeline events in this scope yet.');
     return;
   }
 
@@ -143,9 +147,7 @@ export function renderJobStateDiagram(container, events, onJump) {
   container.textContent = '';
   const graph = deriveJobStateGraph(events);
   if (graph.states.length === 0) {
-    const empty = document.createElement('p');
-    empty.textContent = 'No Job State transitions in this scope yet.';
-    container.appendChild(empty);
+    renderEmptyState(container, 'No Job State transitions in this scope yet.');
     return;
   }
 
@@ -192,13 +194,11 @@ export function renderJobStateDiagram(container, events, onJump) {
     const line = el('line', { x1, y1, x2, y2, stroke: '#8a8f98', 'marker-end': 'url(#arrowhead)' });
     line.style.cursor = 'pointer';
     line.addEventListener('click', () => {
-      let lastMatch = null;
-      for (const event of events) {
-        if (event.category === 'job-state-change' && event.fields.from === transition.from && event.fields.to === transition.to) {
-          lastMatch = event.index;
-        }
-      }
-      if (lastMatch !== null) onJump(lastMatch);
+      const lastMatch = findLast(
+        events,
+        (e) => e.category === 'job-state-change' && e.fields.from === transition.from && e.fields.to === transition.to,
+      );
+      if (lastMatch) onJump(lastMatch.index);
     });
     svg.appendChild(line);
     const label = el('text', { x: (x1 + x2) / 2, y: (y1 + y2) / 2 - 4, 'text-anchor': 'middle', class: 'transition-count' });

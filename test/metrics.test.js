@@ -47,6 +47,7 @@ test('deriveGateUsage resolves the first Swap (toTool T3) to gate 3 via the prec
   for (const u of usage) {
     assert.ok(u.gate >= 0 && u.gate <= 8);
     assert.ok(u.count > 0);
+    assert.equal(realSample.events[u.lastEventIndex].category, 'swap');
   }
 });
 
@@ -86,6 +87,10 @@ test('deriveErrorPauseCountsPerSession accounts for every session-attributed err
   assert.equal(totalCounted, totalAttributed);
   // Session 2 contains the real pause/error incident in the fixture.
   assert.ok(perSession[1].count > 0);
+  assert.equal(realSample.events[perSession[1].firstEventIndex].category, 'error-pause');
+  for (const s of perSession) {
+    assert.equal(s.count === 0, s.firstEventIndex === null);
+  }
 });
 
 test('parseGateMapBlock extracts tools, availability, and the selected tool', () => {
@@ -133,4 +138,5 @@ test('deriveWearCounterSummary accumulates INCR counts and captures the LIMIT', 
   assert.equal(servoDown.limit, 5000);
   assert.equal(cutterBlade.count, 3);
   assert.equal(cutterBlade.limit, 3000);
+  assert.equal(realSample.events[servoDown.lastEventIndex].fields.counter, 'servo_down');
 });
