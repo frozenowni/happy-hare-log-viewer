@@ -2,7 +2,7 @@
 
 ### Issue tracker
 
-Issues live as GitHub Issues (no remote configured yet — will be created when the repo is first pushed). See `docs/agents/issue-tracker.md`.
+Issues live as GitHub Issues on `frozenowni/happy-hare-log-viewer`. See `docs/agents/issue-tracker.md`.
 
 ### Triage labels
 
