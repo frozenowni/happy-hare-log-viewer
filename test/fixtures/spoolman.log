@@ -1,0 +1,9 @@
+10:00:00 > MMU_SPOOLMAN REFRESH=1
+10:00:00   DEBUG: Requesting the following gate/spool_id pairs from Spoolman: {0: 12, 1: 7}
+10:00:01 Spool ID: 12 automatically assigned to gate 0
+10:00:02   DEBUG: Activating spool 12...
+10:00:10 > MMU_SPOOLMAN SET GATE=1 SPOOLID=99
+10:00:10   DEBUG: Setting spool 99 to gate 1 directly in spoolman db
+10:00:15 > MMU_SPOOLMAN SET GATE=2 SPOOLID=5
+10:00:15 Error while setting active spool: Connection refused
+         Check that Spoolman is running and 'spoolman_ipaddress'/'spoolman_port' are set correctly in mmu_parameters.cfg

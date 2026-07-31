@@ -1,0 +1,513 @@
+11:30:40 > MMU_HOME
+11:30:40 Homing MMU...
+11:30:40   DEBUG: Assertion failure: Gate -1 has no unit!
+11:30:41   DEBUG: Selecting tool T0 on gate 0...
+11:30:42 Tool T0 enabled
+11:30:45 > MMU_SELECT GATE=1
+11:30:46   DEBUG: Resetting tool selected to match TTG map for current gate (1)
+11:30:46 Gate : | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+         Tools: |T0 |T1 |T2 |T3 |T4 |T5 |T6 |T7 |T8 |
+         Avail: | B | B | B | B | B | B | B | ? |   |
+         Selct: ----|\ /|---------------------------- T1
+         [T1] > En ......... (e) .. [Ex .. (t) .. Nz] UNLOADED 0.0mm (e:0.0mm)
+11:30:46 > MMU_CHECK_GATE GATE=1 QUIET=1
+11:30:46 Checking gate 1...
+11:30:48 > MMU_STATS COUNTER=servo_down INCR=1
+11:30:49 Gate 1 - Filament detected. Marked available
+11:30:52   DEBUG: Selecting tool T1 on gate 1...
+11:30:52 Tool T1 enabled
+11:30:54 > MMU_SELECT GATE=3
+11:30:54   DEBUG: Resetting tool selected to match TTG map for current gate (3)
+11:30:54 Gate : | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+         Tools: |T0 |T1 |T2 |T3 |T4 |T5 |T6 |T7 |T8 |
+         Avail: | B | B | B | B | B | B | B | ? |   |
+         Selct: ------------|\ /|-------------------- T3
+         [T3] < En ......... (e) .. [Ex .. (t) .. Nz] UNLOADED 10.1mm (e:0.0mm)
+11:30:55 > MMU_CHECK_GATE GATE=3 QUIET=1
+11:30:55 Checking gate 3...
+11:30:56 > MMU_STATS COUNTER=servo_down INCR=1
+11:30:57 Gate 3 - Filament detected. Marked available
+11:31:01   DEBUG: Selecting tool T3 on gate 3...
+11:31:01 Tool T3 enabled
+11:33:04 > MMU_PRINT_START
+11:33:04   DEBUG: Job State: INITIALIZED -> STARTED (MMU State: Encoder: Enabled, Synced: False, Paused temp: None, Resume to state: ready, Position saved for: , pause_resume: False, Idle timeout: 36000.00s)
+11:33:04 Happy Hare initialized ready for print (no filament preloaded)
+11:33:04   DEBUG: Job State: STARTED -> PRINTING (MMU State: Encoder: Enabled, Synced: False, Paused temp: None, Resume to state: ready, Position saved for: , pause_resume: False, Idle timeout: 36000.00s)
+11:33:07 > MMU_STATS COUNTER=servo_down INCR=1
+11:33:07 MmuSyncFeedbackManager: Synced MMU to extruder
+11:33:07   DEBUG: Modifying MMU stepper_mmu_gear run current to 70% (0.34A) for extruder syncing
+11:33:07   DEBUG: Clearing saved toolhead position and rising toolchange floor
+11:33:27 Warning: Looks like slicer is setup with 4 extruders but your MMU has 9 gates! These should match but will attempt to continue
+11:33:27 > MMU_SLICER_TOOL_MAP RESET=1 PURGE_VOLUMES=0.0,5.4,6.3,18.1,5.4,0.0,6.3,18.1,46.0,46.0,0.0,56.8,19.4,19.4,11.2,0.0 NUM_SLICER_TOOLS=4 INITIAL_TOOL=3 TOTAL_TOOLCHANGES=0
+11:33:27 > MMU_SLICER_TOOL_MAP TOOL=0 TEMP=250 MATERIAL='ABS' COLOR=E0E0E0 NAME='ttMM - ABS - fiberlogy - white - 0.4 DB nozzle - 24mm³s' USED=0 QUIET=1 AUTOMAP=none
+11:33:27 > MMU_SLICER_TOOL_MAP TOOL=1 TEMP=210 MATERIAL='PLA' COLOR=E0E0E0 NAME='ttMM - PLA - Polymaker Panchroma - luminous rainbow - 0.4 DB nozzle - 24mm³s'  QUIET=1 AUTOMAP=none
+11:33:27 > MMU_SLICER_TOOL_MAP TOOL=2 TEMP=210 MATERIAL='PLA' COLOR=000000 NAME='ttMM - PLA - Polymaker Polyterra - charcoal black - 0.4 DB nozzle - 24mm³s' USED=0 QUIET=1 AUTOMAP=none
+11:33:27 > MMU_SLICER_TOOL_MAP TOOL=3 TEMP=210 MATERIAL='PLA' COLOR=DEFF20 NAME='ttMM - PLA - extrudr NX2 - neon yellow - 0.4 DB nozzle - 24mm³s'  QUIET=1 AUTOMAP=none
+11:33:27 > MMU_SLICER_TOOL_MAP SPARSE_PURGE_MAP=1 NUM_SLICER_TOOLS=4
+11:33:27 --------- Slicer MMU Tool Summary ---------
+         2 color print (Purge volume map loaded)
+         T1 (gate 1, PLA, e0e0e0, 210°C)
+         T3 (gate 3, PLA, deff20, 210°C)
+         Initial Tool: T3
+         -------------------------------------------
+         Purge Volume Map (mm^3):
+         To -> T0   T1   T2   T3 
+         T0    -    -    -    - 
+         T1    -    -    -    18
+         T2    -    -    -    - 
+         T3    -    19   -    - 
+11:33:27 Checking all required gates have filament loaded...
+11:33:27 > MMU_CHECK_GATE TOOLS=1,3
+11:33:27 Will check gates: 1, 3
+11:33:29 Checking gate 1...
+11:33:30 MmuSyncFeedbackManager: Unsynced MMU from extruder
+11:33:30   DEBUG: Restoring MMU stepper_mmu_gear run current to 100% (0.49A)
+11:33:31 > MMU_STATS COUNTER=servo_down INCR=1
+11:33:33 Tool T1 - Filament detected. Gate 1 marked available
+11:33:37 Checking gate 3...
+11:33:38 > MMU_STATS COUNTER=servo_down INCR=1
+11:33:40 Tool T3 - Filament detected. Gate 3 marked available
+11:33:43   DEBUG: Selecting tool T3 on gate 3...
+11:33:43 Tool T3 enabled
+11:33:43 Gate : | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+         Tools: |T0 |T1 |T2 |T3 |T4 |T5 |T6 |T7 |T8 |
+         Avail: | B | B | B | B | B | B | B | ? |   |
+         Selct: ------------|\ /|-------------------- T3
+11:33:43 MmuSyncFeedbackManager: Synced MMU to extruder
+11:33:44   DEBUG: Modifying MMU stepper_mmu_gear run current to 70% (0.34A) for extruder syncing
+11:33:44 > MMU_CALC_PURGE_VOLUMES SOURCE=slicer MIN=50
+11:33:44 Purge map updated. Use 'MMU_SLICER_TOOL_MAP PURGE_MAP=1' to view
+11:33:44 > CLEAR_PAUSE
+11:33:44   DEBUG: MMU CLEAR_PAUSE wrapper called
+11:33:44   DEBUG: Clearing saved toolhead position
+11:37:23 Loading initial tool T3...
+11:37:23 > MMU_CHANGE_TOOL STANDALONE=1 RESTORE=0 TOOL=3
+11:37:23   DEBUG: Tool change initiated with standalone MMU tip forming and standalone MMU purging
+11:37:23 Tool change requested: T3
+11:37:23   DEBUG: Saving toolhead gcode state and position (X:309.5 Y:226.0 Z:6.0 E:-5.0) for toolchange
+11:37:23 Saving toolhead position (x:309.5, y:226.0, z:6.0)
+11:37:23   DEBUG: Loading tool T3...
+11:37:24 Loading filament...
+11:37:24 [T3] > En ......... (e) .. [Ex .. (t) .. Nz] UNLOADED 0.0mm (e:0.0mm)
+11:37:24 MmuSyncFeedbackManager: Unsynced MMU from extruder
+11:37:25   DEBUG: Restoring MMU stepper_mmu_gear run current to 100% (0.49A)
+11:37:26 [T3] > En >........ (e) .. [Ex .. (t) .. Nz] 70.0mm (e:46.0mm)
+11:37:26   DEBUG: Loading bowden tube
+11:37:31 [T3] > En >>>>>>>>> (*) .. [Ex .. (t) .. Nz] 743.4mm (e:719.4mm)
+11:37:31   DEBUG: Loading filament into extruder
+11:37:31 Waiting for extruder to reach target (slicer) temperature: 210.0°C
+11:37:45   DEBUG: Homing up to 60.0mm to toolhead sensor (synced)
+11:37:47 [T3] > En >>>>>>>>> (*) >> [Ex >>|(t) .. Nz] 766.4mm (e:742.4mm)
+11:37:47   DEBUG: Loading last 44.0mm to the nozzle...
+11:37:50 [T3] > En >>>>>>>>> (*) >> [Ex >> (*) >> Nz] LOADED 810.4mm (e:786.6mm)
+11:37:50   DEBUG: Filament should be loaded to nozzle
+11:37:50 Load of 810.4mm filament successful (adjusted encoder: 799.6mm)
+11:37:50   DEBUG: Autotune: bowden move ratio: 1.0000, Extra homing movement: 2.8mm
+11:37:50 MmuSyncFeedbackManager: Synced MMU to extruder
+11:37:51   DEBUG: Modifying MMU stepper_mmu_gear run current to 70% (0.34A) for extruder syncing
+11:38:31 MMU Statistics:
+         +-----------+-----------+---------------------+----------+
+         |  1519(1)  | unloading |       loading       | complete |
+         |   swaps   |     -     |    -     |   post   |   swap   |
+         +-----------+-----------+----------+----------+----------+
+         |    total  |  11:51:00 | 18:11:06 | 11:13:41 | 28:30:20 |
+         |     └ avg |      28.1 |     43.1 |     26.6 |     1:07 |
+         | this job  |         - |     1:08 |     40.9 |     1:08 |
+         |     └ avg |         - |     1:08 |     40.9 |     1:08 |
+         |      last |         - |     1:08 |     40.9 |     1:08 |
+         +-----------+-----------+----------+----------+----------+
+         
+         31:03:52 spent paused over 122 pauses (All time)
+         0.00 spent paused over 0 pauses (This job)
+         1 / 0 toolchanges
+         Number of swaps since last incident: 3 (Record: 394)
+         
+         Gate Statistics:
+         0:😱, 1:😎, 2:😱, 3:😎, 4:😢, 5:😎, 6:😐, 7:—, 8:😎
+11:38:31   DEBUG: Continuing from printing state after toolchange
+11:38:31 Skipping restore of toolhead XYZ position
+11:38:31   DEBUG: Clearing saved toolhead position
+11:38:32 > MMU_CHANGE_TOOL TOOL=3 NEXT_POS="73.856,73.813" ; T3
+11:38:32   DEBUG: Tool change initiated with standalone MMU tip forming and slicer purging
+11:38:32 Tool T3 is already loaded
+11:38:45   DEBUG: Setting rising toolchange floor to 1.6
+11:44:03   DEBUG: Setting rising toolchange floor to 1.8
+11:44:21   DEBUG: Setting rising toolchange floor to 2.0
+11:44:40   DEBUG: Setting rising toolchange floor to 2.2
+11:44:57   DEBUG: Setting rising toolchange floor to 2.4
+11:45:17   DEBUG: Setting rising toolchange floor to 2.6
+11:46:01   DEBUG: Setting rising toolchange floor to 2.8
+11:46:16   DEBUG: Setting rising toolchange floor to 3.0
+11:46:33   DEBUG: Setting rising toolchange floor to 3.2
+11:46:49   DEBUG: Setting rising toolchange floor to 3.4
+11:47:06   DEBUG: Setting rising toolchange floor to 3.6
+11:47:22 > MMU_CHANGE_TOOL TOOL=1 NEXT_POS="243.318,147.121" ; T1
+11:47:22   DEBUG: Tool change initiated with standalone MMU tip forming and slicer purging
+11:47:22 Tool change requested, from T3 to T1
+11:47:22   DEBUG: Saving toolhead gcode state and position (X:110.6 Y:81.6 Z:4.1 E:1367.2) for toolchange
+11:47:22 Saving toolhead position (x:110.6, y:81.6, z:4.1)
+11:47:22   DEBUG: Unloading tool T3
+11:47:24 Parking toolhead at (x:50.0, y:300.0, z:5.1) for force_park operation
+11:47:25 Unloading filament...
+11:47:25 [T3] < En <<<<<<<<< (*) << [Ex << (*) << Nz] LOADED 0.0mm (e:0.0mm)
+11:47:26   DEBUG: Setting pressure advance for tip forming: 0.0000
+11:47:26 Forming tip...
+11:47:26 Retracting filament 26.0mm prior to cut
+11:47:27 > MMU_STATS COUNTER=cutter_blade INCR=1
+11:47:27 Pushing filament fragment back 8.0mm after cut
+11:47:30   DEBUG: Restoring pressure advance: 0.0350
+11:47:30 [T3] < En <<<<<<<<< (*) << [Ex << (*) <. Nz] -59.0mm (e:59.5mm)
+11:47:31   DEBUG: Extracting filament from extruder
+11:47:31   DEBUG: Reverse homing up to 125.7mm off extruder sensor (synced) to exit extruder
+11:47:32 MmuSyncFeedbackManager: Unsynced MMU from extruder
+11:47:32   DEBUG: Restoring MMU stepper_mmu_gear run current to 100% (0.49A)
+11:47:37 [T3] < En <<<<<<<<<|(e) .. [Ex .. (t) .. Nz] -128.6mm (e:129.5mm)
+11:47:37   DEBUG: Filament should be out of extruder
+11:47:37   DEBUG: Unloading bowden tube
+11:47:37 [T3] < En <<<<<.... (e) .. [Ex .. (t) .. Nz] -112.7mm (e:129.5mm)
+11:47:46 [T3] < En <........ (e) .. [Ex .. (t) .. Nz] -782.1mm (e:807.7mm)
+11:47:48 [T3] < En ......... (e) .. [Ex .. (t) .. Nz] UNLOADED -821.6mm (e:834.5mm)
+11:47:48 Unload of -821.6mm filament successful (adjusted encoder: -847.5mm)
+11:47:48   DEBUG: Autotune: bowden move ratio: 1.0131, Extra homing movement: -23.5mm
+11:47:49 MmuSyncFeedbackManager: Synced MMU to extruder
+11:47:49   DEBUG: Modifying MMU stepper_mmu_gear run current to 70% (0.34A) for extruder syncing
+11:47:49   DEBUG: Loading tool T1...
+11:47:49   DEBUG: Selecting tool T1 on gate 1...
+11:47:51 Tool T1 enabled
+11:47:52 Loading filament...
+11:47:52 [T1] > En ......... (e) .. [Ex .. (t) .. Nz] UNLOADED 0.0mm (e:0.0mm)
+11:47:53 MmuSyncFeedbackManager: Unsynced MMU from extruder
+11:47:53   DEBUG: Restoring MMU stepper_mmu_gear run current to 100% (0.49A)
+11:47:54 > MMU_STATS COUNTER=servo_down INCR=1
+11:47:55 [T1] > En >........ (e) .. [Ex .. (t) .. Nz] 70.0mm (e:56.6mm)
+11:47:55   DEBUG: Loading bowden tube
+11:48:00 [T1] > En >>>>>>>>> (*) .. [Ex .. (t) .. Nz] 732.8mm (e:713.7mm)
+11:48:00   DEBUG: Loading filament into extruder
+11:48:00   DEBUG: Homing up to 60.0mm to toolhead sensor (synced)
+11:48:02 [T1] > En >>>>>>>>> (*) >> [Ex >>|(t) .. Nz] 746.7mm (e:727.1mm)
+11:48:02   DEBUG: Loading last 45.0mm to the nozzle...
+11:48:05 [T1] > En >>>>>>>>> (*) >> [Ex >> (*) >> Nz] LOADED 791.7mm (e:771.2mm)
+11:48:05   DEBUG: Filament should be loaded to nozzle
+11:48:05 Load of 791.7mm filament successful (adjusted encoder: 784.2mm)
+11:48:05   DEBUG: Autotune: bowden move ratio: 0.9914, Extra homing movement: 0.0mm
+11:48:05   DEBUG: Purging expected to be performed by slicer
+11:48:06 MmuSyncFeedbackManager: Synced MMU to extruder
+11:48:06   DEBUG: Modifying MMU stepper_mmu_gear run current to 70% (0.34A) for extruder syncing
+11:48:27 MMU Statistics:
+         +-----------+-----------+---------------------+----------+
+         |  1520(2)  | unloading |       loading       | complete |
+         |   swaps   |     -     |    -     |   post   |   swap   |
+         +-----------+-----------+----------+----------+----------+
+         |    total  |  11:51:25 | 18:11:42 | 11:14:03 | 28:31:24 |
+         |     └ avg |      28.1 |     43.1 |     26.6 |     1:07 |
+         | this job  |      25.0 |     1:44 |     1:03 |     2:11 |
+         |     └ avg |      12.5 |     52.1 |     31.5 |     1:05 |
+         |      last |      25.0 |     35.9 |     22.2 |     1:03 |
+         +-----------+-----------+----------+----------+----------+
+         
+         31:03:52 spent paused over 122 pauses (All time)
+         0.00 spent paused over 0 pauses (This job)
+         2 / 0 toolchanges
+         Number of swaps since last incident: 4 (Record: 394)
+         
+         Gate Statistics:
+         0:😱, 1:😎, 2:😱, 3:😎, 4:😢, 5:😎, 6:😐, 7:—, 8:😎
+11:48:27   DEBUG: Continuing from printing state after toolchange
+11:48:27 Restoring toolhead position to last pos: (x:110.6, y:81.6, z:4.1)
+11:48:27   DEBUG: Clearing saved toolhead position
+11:48:27   DEBUG: Ensuring correct gcode state and position (X:243.3 Y:147.1 Z:4.1 E:1583.7) after toolchange
+11:48:27   DEBUG: Setting rising toolchange floor to 4.4
+11:48:37 > CANCEL_PRINT
+11:48:37   DEBUG: MMU_CANCEL_PRINT wrapper called
+11:48:37   DEBUG: Saving toolhead gcode state and position (X:242.2 Y:220.6 Z:0.2 E:1376.7) for cancel
+11:48:37 Saving toolhead position (x:242.2, y:220.6, z:0.2)
+11:48:37 Retracting 5.0mm
+11:48:37 Parking toolhead at (x:50.0, y:50.0, z:14.4) for cancel operation
+11:48:37   DEBUG: Automatic clog detection: new min_headroom (< 5.0mm desired): 4.7mm
+11:48:37   DEBUG: Automatic clog detection: new min_headroom (< 5.0mm desired): 4.4mm
+11:48:37   DEBUG: Automatic clog detection: new min_headroom (< 5.0mm desired): 4.1mm
+11:48:37   DEBUG: Automatic clog detection: new min_headroom (< 5.0mm desired): 3.7mm
+11:48:38 Print cancelled!
+11:48:38 Ejecting filament on print cancel
+11:48:38 > MMU_UNLOAD RESTORE=0
+11:48:38 Parking toolhead at (x:50.0, y:300.0, z:14.4) for unload operation
+11:48:38   DEBUG: Unloading tool T1
+11:48:40 Parking toolhead at (x:50.0, y:300.0, z:14.4) for force_park operation
+11:48:41 Unloading filament...
+11:48:41 [T1] < En <<<<<<<<< (*) << [Ex << (*) << Nz] LOADED 0.0mm (e:0.0mm)
+11:48:41   DEBUG: Setting pressure advance for tip forming: 0.0000
+11:48:41 Forming tip...
+11:48:41 Retracting filament 21.0mm prior to cut
+11:48:42 > MMU_STATS COUNTER=cutter_blade INCR=1
+11:48:42 Pushing filament fragment back 8.0mm after cut
+11:48:45   DEBUG: Restoring pressure advance: 0.0100
+11:48:45 [T1] < En <<<<<<<<< (*) << [Ex << (*) <. Nz] -59.0mm (e:59.5mm)
+11:48:47   DEBUG: Extracting filament from extruder
+11:48:47   DEBUG: Reverse homing up to 125.7mm off extruder sensor (synced) to exit extruder
+11:48:48 MmuSyncFeedbackManager: Unsynced MMU from extruder
+11:48:48   DEBUG: Restoring MMU stepper_mmu_gear run current to 100% (0.49A)
+11:48:51 [T1] < En <<<<<<<<<|(e) .. [Ex .. (t) .. Nz] -108.2mm (e:109.4mm)
+11:48:51   DEBUG: Filament should be out of extruder
+11:48:51   DEBUG: Unloading bowden tube
+11:48:51 [T1] < En <<<<<.... (e) .. [Ex .. (t) .. Nz] -112.7mm (e:109.4mm)
+11:49:01 [T1] < En <........ (e) .. [Ex .. (t) .. Nz] -782.1mm (e:781.8mm)
+11:49:03 [T1] < En ......... (e) .. [Ex .. (t) .. Nz] UNLOADED -825.1mm (e:809.6mm)
+11:49:03 Unload of -825.1mm filament successful (adjusted encoder: -822.6mm)
+11:49:03   DEBUG: Autotune: bowden move ratio: 1.0045, Extra homing movement: -20.0mm
+11:49:04 MmuSyncFeedbackManager: Synced MMU to extruder
+11:49:04   DEBUG: Modifying MMU stepper_mmu_gear run current to 70% (0.34A) for extruder syncing
+11:49:04   DEBUG: Continuing from printing state after unload
+11:49:04 Skipping restore of toolhead XYZ position
+11:49:04   DEBUG: Clearing saved toolhead position
+11:49:04   DEBUG: Clearing saved toolhead position
+11:49:05   DEBUG: Job State: PRINTING -> CANCELLED (MMU State: Encoder: Disabled, Synced: True, Paused temp: None, Resume to state: ready, Position saved for: , pause_resume: False, Idle timeout: 36000.00s)
+11:49:05 MmuSyncFeedbackManager: Unsynced MMU from extruder
+11:49:06   DEBUG: Restoring MMU stepper_mmu_gear run current to 100% (0.49A)
+11:49:06   DEBUG: Clearing saved toolhead position and rising toolchange floor
+11:45:47 
+         
+         
+         MMU Startup -----------------------------------------------
+         
+11:45:47   DEBUG: Found tmc2209 on gear_stepper. Current control enabled. Stallguard 'touch' homing possible.
+11:45:47   DEBUG: Found tmc2209 on extruder. Current control enabled. Stallguard 'touch' homing possible.
+11:45:47   DEBUG: Loaded saved bowden lengths: [719.4, 719.4, 719.4, 719.4, 719.4, 719.4, 719.4, 719.4, 719.4]
+11:45:47   DEBUG: Loaded saved gear rotation distances: [23.016251, 23.043867, 23.025459, 22.997862, 23.12665, 23.01626, 23.01626, 23.034659, 23.034659]
+11:45:47   DEBUG: Loaded saved encoder resolution: 0.9592
+11:45:47   DEBUG: Loaded saved selector offsets: [1.6, 22.9, 44.2, 65.5, 86.8, 108.1, 129.4, 150.7, 172.0]
+11:45:47   DEBUG: Loaded saved bypass offset: 180.6
+11:45:47   DEBUG: Found tmc2209 on selector_stepper. Stallguard 'touch' movement and recovery possible.
+11:45:48   DEBUG: Loading persisted MMU state
+11:45:50 > __MMU_BOOTUP
+11:45:50 (\_/)
+         ( *,*)
+         (")_(") Happy Hare v3.4.1 Ready...
+11:45:50   DEBUG: Job State: READY -> INITIALIZED (MMU State: Encoder: Enabled, Synced: False, Paused temp: None, Resume to state: ready, Position saved for: , pause_resume: False, Idle timeout: 36000.00s)
+11:45:50 Gate : | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+         Tools: |T0 |T1 |T2 |T3 |T4 |T5 |T6 |T7 |T8 |
+         Avail: | B | B | B | B | B | B | B | ? |   |
+         Selct: ----|\ /|---------------------------- T1
+11:45:50 [T1] > En ......... (e) .. [Ex .. (t) .. Nz] UNLOADED 0.0mm (e:0.0mm)
+11:45:51 > MMU_STATS COUNTER=mmu_restarts INCR=1
+11:45:51 > MMU_STATS COUNTER=servo_down LIMIT=5000 WARNING="Inspect servo arm for wear/damage"
+11:45:51 > MMU_STATS COUNTER=cutter_blade LIMIT=3000 WARNING="Inspect/replace filament cutting blade"
+12:01:52 > MMU_PRINT_START
+12:01:52   DEBUG: Job State: INITIALIZED -> STARTED (MMU State: Encoder: Enabled, Synced: False, Paused temp: None, Resume to state: ready, Position saved for: , pause_resume: False, Idle timeout: 36000.00s)
+12:01:52 Happy Hare initialized ready for print (no filament preloaded)
+12:01:52   DEBUG: Job State: STARTED -> PRINTING (MMU State: Encoder: Enabled, Synced: False, Paused temp: None, Resume to state: ready, Position saved for: , pause_resume: False, Idle timeout: 36000.00s)
+12:01:53 > MMU_STATS COUNTER=servo_down INCR=1
+12:01:54 MmuSyncFeedbackManager: Synced MMU to extruder
+12:01:54   DEBUG: Modifying MMU stepper_mmu_gear run current to 70% (0.34A) for extruder syncing
+12:01:54   DEBUG: Clearing saved toolhead position and rising toolchange floor
+12:02:19 Warning: Looks like slicer is setup with 4 extruders but your MMU has 9 gates! These should match but will attempt to continue
+12:02:19 > MMU_SLICER_TOOL_MAP RESET=1 PURGE_VOLUMES=0.0,5.4,6.3,18.1,5.4,0.0,6.3,18.1,46.0,46.0,0.0,56.8,19.4,19.4,11.2,0.0 NUM_SLICER_TOOLS=4 INITIAL_TOOL=1 TOTAL_TOOLCHANGES=0
+12:02:19 > MMU_SLICER_TOOL_MAP TOOL=0 TEMP=250 MATERIAL='ABS' COLOR=E0E0E0 NAME='ttMM - ABS - fiberlogy - white - 0.4 DB nozzle - 24mm³s' USED=0 QUIET=1 AUTOMAP=none
+12:02:19 > MMU_SLICER_TOOL_MAP TOOL=1 TEMP=210 MATERIAL='PLA' COLOR=E0E0E0 NAME='ttMM - PLA - Polymaker Panchroma - luminous rainbow - 0.4 DB nozzle - 24mm³s'  QUIET=1 AUTOMAP=none
+12:02:19 > MMU_SLICER_TOOL_MAP TOOL=2 TEMP=210 MATERIAL='PLA' COLOR=000000 NAME='ttMM - PLA - Polymaker Polyterra - charcoal black - 0.4 DB nozzle - 24mm³s' USED=0 QUIET=1 AUTOMAP=none
+12:02:19 > MMU_SLICER_TOOL_MAP TOOL=3 TEMP=210 MATERIAL='PLA' COLOR=DEFF20 NAME='ttMM - PLA - extrudr NX2 - neon yellow - 0.4 DB nozzle - 24mm³s' USED=0 QUIET=1 AUTOMAP=none
+12:02:19 > MMU_SLICER_TOOL_MAP
+12:02:19 --------- Slicer MMU Tool Summary ---------
+         Single color print
+         T1 (gate 1, PLA, e0e0e0, 210°C)
+         Initial Tool: T1
+         -------------------------------------------
+         DETAIL=1 to see purge volume map
+12:02:20 Checking all required gates have filament loaded...
+12:02:20 > MMU_CHECK_GATE TOOLS=1
+12:02:20 Checking gate 1...
+12:02:21 MmuSyncFeedbackManager: Unsynced MMU from extruder
+12:02:21   DEBUG: Restoring MMU stepper_mmu_gear run current to 100% (0.49A)
+12:02:22 Tool T1 - Filament detected. Gate 1 marked available
+12:02:25   DEBUG: Selecting tool T1 on gate 1...
+12:02:25 Tool T1 enabled
+12:02:25 Gate : | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+         Tools: |T0 |T1 |T2 |T3 |T4 |T5 |T6 |T7 |T8 |
+         Avail: | B | B | B | B | B | B | B | ? |   |
+         Selct: ----|\ /|---------------------------- T1
+12:02:25 MmuSyncFeedbackManager: Synced MMU to extruder
+12:02:26   DEBUG: Modifying MMU stepper_mmu_gear run current to 70% (0.34A) for extruder syncing
+12:02:26 > MMU_CALC_PURGE_VOLUMES SOURCE=slicer MIN=50
+12:02:26 Purge map updated. Use 'MMU_SLICER_TOOL_MAP PURGE_MAP=1' to view
+12:02:26 > CLEAR_PAUSE
+12:02:26   DEBUG: MMU CLEAR_PAUSE wrapper called
+12:02:26   DEBUG: Clearing saved toolhead position
+12:08:19 Loading initial tool T1...
+12:08:19 > MMU_CHANGE_TOOL STANDALONE=1 RESTORE=0 TOOL=1
+12:08:19   DEBUG: Tool change initiated with standalone MMU tip forming and standalone MMU purging
+12:08:19 Tool change requested: T1
+12:08:19   DEBUG: Saving toolhead gcode state and position (X:108.2 Y:245.1 Z:6.6 E:-5.0) for toolchange
+12:08:19 Saving toolhead position (x:108.2, y:245.1, z:6.6)
+12:08:19   DEBUG: Loading tool T1...
+12:08:20 Loading filament...
+12:08:20 [T1] > En ......... (e) .. [Ex .. (t) .. Nz] UNLOADED 0.0mm (e:0.0mm)
+12:08:20 MmuSyncFeedbackManager: Unsynced MMU from extruder
+12:08:21   DEBUG: Restoring MMU stepper_mmu_gear run current to 100% (0.49A)
+12:08:22 [T1] > En >........ (e) .. [Ex .. (t) .. Nz] 70.0mm (e:52.8mm)
+12:08:22   DEBUG: Loading bowden tube
+12:08:28   DEBUG: Correction load move was necessary, encoder now measures 605.3mm
+12:08:30   DEBUG: Correction load move was necessary, encoder now measures 605.3mm
+12:08:30 [T1] > En >>>>>.... (e) .. [Ex .. (t) .. Nz] 964.9mm (e:605.3mm)
+12:08:30 Warning: Excess slippage was detected in bowden tube load afer correction moves. Gear moved 666.6mm, Encoder measured 552.5mm. See mmu.log for more details
+12:08:30   DEBUG: Possible causes of slippage:
+         Calibration ref length too long (hitting extruder gear before homing)
+         Calibration ratio for gate is not accurate
+         MMU gears are not properly gripping filament
+         Encoder reading is inaccurate
+         Faulty servo
+12:08:30 [T1] > En >>>>>>>>> (e) .. [Ex .. (t) .. Nz] 964.9mm (e:605.3mm)
+12:08:30   DEBUG: Loading filament into extruder
+12:08:30 Waiting for extruder to reach target (slicer) temperature: 210.0°C
+12:08:41   DEBUG: Homing up to 60.0mm to toolhead sensor (synced)
+12:08:45 [T1] > En >>>>>>>>> (e) >> [Ex >> (t) .. Nz] 1024.9mm (e:605.3mm)
+12:08:45 MmuSyncFeedbackManager: Synced MMU to extruder
+12:08:45   DEBUG: Modifying MMU stepper_mmu_gear run current to 70% (0.34A) for extruder syncing
+12:08:45 MMU issue detected. Print will be paused
+         Reason: Load sequence failed because:
+         Failed to reach toolhead sensor after moving 60.0mm.
+         Occured when changing tool: > T1
+12:08:45 After fixing, call RESUME to continue printing (MMU_UNLOCK to restore temperature)
+12:08:45 Retracting 2.0mm
+12:08:45 Parking toolhead at (x:50.0, y:50.0, z:11.6) for pause operation
+12:08:45   DEBUG: Job State: PRINTING -> PAUSE_LOCKED (MMU State: Encoder: Disabled, Synced: True, Paused temp: 210.0, Resume to state: printing, Position saved for: pause, pause_resume: False, Idle timeout: 72000.00s)
+12:08:45 > PAUSE
+12:08:45   DEBUG: MMU PAUSE wrapper called
+12:08:48 Attempting to recover filament position...
+12:08:48   DEBUG: Checking for filament in MMU...
+12:08:49 MmuSyncFeedbackManager: Unsynced MMU from extruder
+12:08:50   DEBUG: Restoring MMU stepper_mmu_gear run current to 100% (0.49A)
+12:08:50   DEBUG: Filament detected in encoder after buzzing gear motor
+12:08:50 [T1] > En >>>>>.... (e) .. [Ex .. (t) .. Nz] 1024.9mm (e:607.2mm)
+12:09:02 > MMU_UNLOAD
+12:09:02 Parking toolhead at (x:50.0, y:300.0, z:11.6) for unload operation
+12:09:02   DEBUG: Unloading tool T1
+12:09:03 Parking toolhead at (x:50.0, y:300.0, z:11.6) for force_park operation
+12:09:04 Unloading filament...
+12:09:04 [T1] < En <<<<<.... (e) .. [Ex .. (t) .. Nz] 0.0mm (e:0.0mm)
+12:09:05 > MMU_STATS COUNTER=servo_down INCR=1
+12:09:05   DEBUG: Performing synced pre-unload bowden move to ensure filament is not trapped in extruder
+12:09:09 Slowly unloading bowden because unsure of filament position...
+12:09:31 [T1] < En ......... (e) .. [Ex .. (t) .. Nz] UNLOADED -616.3mm (e:602.4mm)
+12:09:31 Unload of -616.3mm filament successful (adjusted encoder: -657.4mm)
+12:09:31   DEBUG: Autotune: bowden move ratio: 0.0000, Extra homing movement: n/a. Tuning not possible
+12:09:32   DEBUG: Continuing from pause_locked state after unload
+12:09:34 > MMU_CHANGE_TOOL TOOL=1 QUIET=1
+12:09:34   DEBUG: Tool change initiated with standalone MMU tip forming and standalone MMU purging
+12:09:34 Tool change requested: T1
+12:09:34   DEBUG: Loading tool T1...
+12:09:35 Loading filament...
+12:09:35 [T1] > En ......... (e) .. [Ex .. (t) .. Nz] UNLOADED 0.0mm (e:0.0mm)
+12:09:36 > MMU_STATS COUNTER=servo_down INCR=1
+12:09:37 [T1] > En >........ (e) .. [Ex .. (t) .. Nz] 70.0mm (e:56.6mm)
+12:09:37   DEBUG: Loading bowden tube
+12:09:42 [T1] > En >>>>>>>>> (*) .. [Ex .. (t) .. Nz] 732.8mm (e:715.6mm)
+12:09:42   DEBUG: Loading filament into extruder
+12:09:42   DEBUG: Homing up to 60.0mm to toolhead sensor (synced)
+12:09:45 [T1] > En >>>>>>>>> (*) >> [Ex >>|(t) .. Nz] 753.6mm (e:738.6mm)
+12:09:45   DEBUG: Loading last 40.0mm to the nozzle...
+12:09:47 [T1] > En >>>>>>>>> (*) >> [Ex >> (*) >> Nz] LOADED 793.6mm (e:777.0mm)
+12:09:47   DEBUG: Filament should be loaded to nozzle
+12:09:47 Load of 793.6mm filament successful (adjusted encoder: 790.0mm)
+12:09:47   DEBUG: Autotune: bowden move ratio: 0.9942, Extra homing movement: 0.5mm
+12:10:01   DEBUG: Continuing from pause_locked state after toolchange
+12:10:01 > __MMU_SENSOR_INSERT SENSOR=extruder EVENTTIME=603.164499288
+12:10:01   DEBUG: Ignoring extruder insertion because bypass not selected
+12:10:03 > RESUME
+12:10:03   DEBUG: MMU RESUME wrapper called
+12:10:03 Enabled extruder heater
+12:10:03   DEBUG: Job State: PAUSE_LOCKED -> PAUSED (MMU State: Encoder: Disabled, Synced: False, Paused temp: 210.0, Resume to state: printing, Position saved for: toolchange, pause_resume: True, Idle timeout: 36000.00s)
+12:10:03 Automatically set filament state to LOADED based on toolhead sensor
+12:10:14   DEBUG: Continuing from paused state after resume
+12:10:14   DEBUG: Job State: PAUSED -> PRINTING (MMU State: Encoder: Enabled, Synced: False, Paused temp: None, Resume to state: printing, Position saved for: toolchange, pause_resume: False, Idle timeout: 36000.00s)
+12:10:17 > MMU_STATS COUNTER=servo_down INCR=1
+12:10:17 MmuSyncFeedbackManager: Synced MMU to extruder
+12:10:17   DEBUG: Modifying MMU stepper_mmu_gear run current to 70% (0.34A) for extruder syncing
+12:10:17 Restoring toolhead position to last pos: (x:108.2, y:245.1, z:6.6)
+12:10:17   DEBUG: Clearing saved toolhead position
+12:10:17   DEBUG: Ensuring correct gcode state and position (X:108.2 Y:245.1 Z:6.6 E:-5.0) after resume
+12:10:18 > MMU_CHANGE_TOOL TOOL=1 NEXT_POS="109.421,102.728" ; T1
+12:10:18   DEBUG: Tool change initiated with standalone MMU tip forming and slicer purging
+12:10:18 Tool T1 is already loaded
+12:10:31   DEBUG: Setting rising toolchange floor to 1.6
+12:43:34 Unloading filament on print end
+12:43:34 > MMU_UNLOAD RESTORE=0
+12:43:34   DEBUG: Saving toolhead gcode state and position (X:230.9 Y:137.4 Z:1.2 E:3020.4) for unload
+12:43:34 Saving toolhead position (x:230.9, y:137.4, z:1.2)
+12:43:34 Retracting 1.0mm
+12:43:34 Parking toolhead at (x:50.0, y:300.0, z:2.6) with ramping lift for unload operation
+12:43:35   DEBUG: Unloading tool T1
+12:43:36 Parking toolhead at (x:50.0, y:300.0, z:2.6) for force_park operation
+12:43:37 Unloading filament...
+12:43:37 [T1] < En <<<<<<<<< (*) << [Ex << (*) << Nz] LOADED 0.0mm (e:0.0mm)
+12:43:37   DEBUG: Setting pressure advance for tip forming: 0.0000
+12:43:37 Forming tip...
+12:43:37 Retracting filament 25.0mm prior to cut
+12:43:38 > MMU_STATS COUNTER=cutter_blade INCR=1
+12:43:38 Pushing filament fragment back 8.0mm after cut
+12:43:41   DEBUG: Restoring pressure advance: 0.0100
+12:43:41 [T1] < En <<<<<<<<< (*) << [Ex << (*) <. Nz] -59.0mm (e:59.5mm)
+12:43:42   DEBUG: Extracting filament from extruder
+12:43:42   DEBUG: Reverse homing up to 125.7mm off extruder sensor (synced) to exit extruder
+12:43:43 MmuSyncFeedbackManager: Unsynced MMU from extruder
+12:43:43   DEBUG: Restoring MMU stepper_mmu_gear run current to 100% (0.49A)
+12:43:48 [T1] < En <<<<<<<<<|(e) .. [Ex .. (t) .. Nz] -129.2mm (e:128.5mm)
+12:43:48   DEBUG: Filament should be out of extruder
+12:43:48   DEBUG: Unloading bowden tube
+12:43:48 [T1] < En <<<<<.... (e) .. [Ex .. (t) .. Nz] -112.7mm (e:128.5mm)
+12:43:57 [T1] < En <........ (e) .. [Ex .. (t) .. Nz] -782.1mm (e:802.9mm)
+12:43:59 [T1] < En ......... (e) .. [Ex .. (t) .. Nz] UNLOADED -825.1mm (e:830.7mm)
+12:43:59 Unload of -825.1mm filament successful (adjusted encoder: -843.7mm)
+12:43:59   DEBUG: Autotune: bowden move ratio: 1.0074, Extra homing movement: -20.0mm
+12:44:00 MmuSyncFeedbackManager: Synced MMU to extruder
+12:44:00   DEBUG: Modifying MMU stepper_mmu_gear run current to 70% (0.34A) for extruder syncing
+12:44:01   DEBUG: Continuing from printing state after unload
+12:44:01 Skipping restore of toolhead XYZ position
+12:44:01   DEBUG: Clearing saved toolhead position
+12:44:01 > MMU_STATS
+12:44:01 MMU Statistics:
+         +-----------+-----------+---------------------+----------+
+         |  1521(1)  | unloading |       loading       | complete |
+         |   swaps   |     -     |    -     |   post   |   swap   |
+         +-----------+-----------+----------+----------+----------+
+         |    total  |  11:52:43 | 18:12:35 | 11:14:17 | 28:32:17 |
+         |     └ avg |      28.1 |     43.1 |     26.6 |     1:07 |
+         | this job  |      54.0 |     52.9 |     13.7 |     53.5 |
+         |     └ avg |      54.0 |     52.9 |     13.7 |     53.5 |
+         |      last |      24.7 |        - |        - |        - |
+         +-----------+-----------+----------+----------+----------+
+         
+         31:05:22 spent paused over 123 pauses (All time)
+         1:29 spent paused over 1 pauses (This job)
+         1 / 0 toolchanges
+         Number of swaps since last incident: 1 (Record: 394)
+         
+         Gate Statistics:
+         0:😱, 1:😱, 2:😱, 3:😎, 4:😢, 5:😎, 6:😐, 7:—, 8:😎
+12:44:01 > MMU_PRINT_END STATE=complete
+12:44:01   DEBUG: Saving toolhead gcode state and position (X:7.0 Y:343.9 Z:-1.0 E:3019.4) for complete
+12:44:01 Saving toolhead position (x:7.0, y:343.9, z:-1.0)
+12:44:01 Retracting 5.0mm
+12:44:01 Parking toolhead at (x:50.0, y:50.0, z:11.6) for complete operation
+12:44:03   DEBUG: Job State: PRINTING -> COMPLETE (MMU State: Encoder: Disabled, Synced: True, Paused temp: None, Resume to state: ready, Position saved for: , pause_resume: False, Idle timeout: 36000.00s)
+12:44:04 MmuSyncFeedbackManager: Unsynced MMU from extruder
+12:44:04   DEBUG: Restoring MMU stepper_mmu_gear run current to 100% (0.49A)
+12:44:04   DEBUG: Clearing saved toolhead position and rising toolchange floor
+12:44:04 Ejecting filament on print cancel
+12:44:05 > MMU_UNLOAD RESTORE=0
+12:44:05 > MMU_PRINT_START FIX_STATE=1
+12:44:05   DEBUG: Job State: COMPLETE -> STARTED (MMU State: Encoder: Enabled, Synced: False, Paused temp: None, Resume to state: ready, Position saved for: , pause_resume: False, Idle timeout: 36000.00s)
+12:44:05 Happy Hare initialized ready for print (no filament preloaded)
+12:44:05   DEBUG: Job State: STARTED -> PRINTING (MMU State: Encoder: Enabled, Synced: False, Paused temp: None, Resume to state: ready, Position saved for: , pause_resume: False, Idle timeout: 36000.00s)
+12:44:06 > MMU_STATS COUNTER=servo_down INCR=1
+12:44:06 MmuSyncFeedbackManager: Synced MMU to extruder
+12:44:06   DEBUG: Modifying MMU stepper_mmu_gear run current to 70% (0.34A) for extruder syncing
+12:44:06   DEBUG: Clearing saved toolhead position and rising toolchange floor
+12:44:06 Filament not loaded
+12:44:06 > CLEAR_PAUSE
+12:44:06   DEBUG: MMU CLEAR_PAUSE wrapper called
+12:44:06   DEBUG: Clearing saved toolhead position
+12:44:07 > MMU_PRINT_END STATE=complete AUTOMATIC=1
+12:44:07   DEBUG: Cannot save toolhead position or z-hop for complete because not homed
+12:44:07   DEBUG: Job State: PRINTING -> COMPLETE (MMU State: Encoder: Disabled, Synced: True, Paused temp: None, Resume to state: ready, Position saved for: , pause_resume: False, Idle timeout: 36000.00s)
+12:44:08 MmuSyncFeedbackManager: Unsynced MMU from extruder
+12:44:08   DEBUG: Restoring MMU stepper_mmu_gear run current to 100% (0.49A)
+12:44:08   DEBUG: Clearing saved toolhead position and rising toolchange floor

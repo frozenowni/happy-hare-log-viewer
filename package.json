@@ -1,0 +1,15 @@
+{
+  "name": "happy-hare-log-viewer",
+  "version": "0.1.0",
+  "description": "Client-side web app for analyzing Happy Hare MMU mmu.log files",
+  "private": true,
+  "license": "GPL-3.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/",
+    "typecheck": "tsc --noEmit -p jsconfig.json"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

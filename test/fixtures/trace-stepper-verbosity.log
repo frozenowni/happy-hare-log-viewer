@@ -1,0 +1,7 @@
+09:12:00 > MMU_CHANGE_TOOL TOOL=2
+09:12:00   DEBUG: Tool change initiated with standalone MMU tip forming and slicer purging
+09:12:00 Tool change requested, from T1 to T2
+09:12:00   TRACE: Running macro: _MMU_FORM_TIP
+09:12:00    STEPPER: SELECTOR MOVE: position=44.2, speed=200, accel=1500
+09:12:01   TRACE: Extruder movement event, move=12.4
+09:12:02 Tool T2 enabled

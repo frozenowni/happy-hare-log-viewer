@@ -47,7 +47,7 @@ The logical, slicer-facing extruder/color slot (T0, T1, ...), mapped to a Gate v
 Happy Hare's current assignment of each Tool to a Gate, rendered in the log as the `Gate: / Tools: / Avail: / Selct:` ascii block. Our Gate Map diagram is a visual re-rendering of this at a given point in the log.
 
 **Load Sequence / Unload Sequence**:
-The multi-step filament move (bowden load/unload, extruder load/unload, nozzle/toolhead-sensor homing) shown as a series of progress-bar Continuation Lines under a single Event, ending in a `Load of Nmm filament successful` / `Unload of -Nmm filament successful` line.
+The multi-step filament move (bowden load/unload, extruder load/unload, nozzle/toolhead-sensor homing) shown as a series of progress-bar Events (each its own Timestamped Entry, not a Continuation Line — they recur every few seconds as the move progresses), ending in a `Load of Nmm filament successful` / `Unload of -Nmm filament successful` Event.
 
 **Encoder Slippage**:
 Divergence between commanded gear-stepper movement and encoder-measured movement during a Load/Unload Sequence, surfaced by Happy Hare as a Warning.

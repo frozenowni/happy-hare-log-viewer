@@ -1,0 +1,12 @@
+23:58:10   DEBUG: Job State: INITIALIZED -> STARTED (MMU State: Encoder: Enabled, Synced: False, Paused temp: None, Resume to state: ready, Position saved for: , pause_resume: False, Idle timeout: 36000.00s)
+23:58:10 Happy Hare initialized ready for print (no filament preloaded)
+23:58:10   DEBUG: Job State: STARTED -> PRINTING (MMU State: Encoder: Enabled, Synced: False, Paused temp: None, Resume to state: ready, Position saved for: , pause_resume: False, Idle timeout: 36000.00s)
+23:59:40 > MMU_CHANGE_TOOL STANDALONE=1 RESTORE=0 TOOL=1
+23:59:40   DEBUG: Tool change initiated with standalone MMU tip forming and standalone MMU purging
+23:59:40 Tool change requested: T1
+23:59:41 Loading filament...
+23:59:41 [T1] > En ......... (e) .. [Ex .. (t) .. Nz] UNLOADED 0.0mm (e:0.0mm)
+00:00:05 [T1] > En >>>>>>>>> (*) >> [Ex >> (*) >> Nz] LOADED 780.0mm (e:760.0mm)
+00:00:05 Load of 780.0mm filament successful (adjusted encoder: 760.0mm)
+00:02:15 > MMU_PRINT_END STATE=complete
+00:02:16   DEBUG: Job State: PRINTING -> COMPLETE (MMU State: Encoder: Disabled, Synced: True, Paused temp: None, Resume to state: ready, Position saved for: , pause_resume: False, Idle timeout: 36000.00s)

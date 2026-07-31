@@ -1,0 +1,10 @@
+14:00:00   DEBUG: Job State: INITIALIZED -> STARTED (MMU State: Encoder: Enabled, Synced: False, Paused temp: None, Resume to state: ready, Position saved for: , pause_resume: False, Idle timeout: 36000.00s)
+14:00:00   DEBUG: Job State: STARTED -> PRINTING (MMU State: Encoder: Enabled, Synced: False, Paused temp: None, Resume to state: ready, Position saved for: , pause_resume: False, Idle timeout: 36000.00s)
+14:00:05 > MMU_CHANGE_TOOL STANDALONE=1 RESTORE=0 TOOL=0
+14:00:05 Tool change requested: T0
+14:00:06 Loading filament...
+14:00:06 [T0] > En ......... (e) .. [Ex .. (t) .. Nz] UNLOADED 0.0mm (e:0.0mm)
+14:00:20 [T0] > En >>>>>>>>> (*) >> [Ex >> (*) >> Nz] LOADED 800.0mm (e:780.0mm)
+14:00:20 Load of 800.0mm filament successful (adjusted encoder: 780.0mm)
+14:05:00 > MMU_PRINT_END STATE=complete
+14:05:01   DEBUG: Job State: PRINTING -> COMPLETE (MMU State: Encoder: Disabled, Synced: True, Paused temp: None, Resume to state: ready, Position saved for: , pause_resume: False, Idle timeout: 36000.00s)
